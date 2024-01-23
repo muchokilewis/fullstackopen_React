@@ -16,21 +16,17 @@ const App = () => {
     let num = 0
     // console.log(anecdotes.length)
 
-    //generating random numbers in JS
-    var random = Math.random()
-    random = random*10
-    console.log(random)
-    // console.log(selected)
-    // console.log(num)
+    //generating random numbers in JS   
+    console.log(selected)
 
-    // return (
-    //     <div>
-    //         {anecdotes[selected]}
-    //         <br />
-    //         <br/>
-    //         <button onClick={() => setSelected(math.Random)}>Randomize</button>
-    //     </div>
-    // )
+    return (
+        <div>
+            {anecdotes[selected]}
+            <br />
+            <br/>
+            <button onClick={() => setSelected(Math.floor(Math.random(0, 7) * 10))}>next anecdote</button>
+        </div>
+    )
 }
 
 export default App
