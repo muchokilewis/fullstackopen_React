@@ -13,18 +13,34 @@ const App = () => {
     ]
 
     const [selected, setSelected] = useState(0)
-    let num = 0
     // console.log(anecdotes.length)
+    const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
 
-    //generating random numbers in JS   
-    console.log(selected)
+    const handleVote = () => {
+      const newPoints = [...points]
+      newPoints[selected] += 1;
+      setPoints(newPoints);
+      console.log(newPoints)
+     
+    }
+    console.log(points)
+    const nextAnecdote = () => {
+      // by multiplying 'Math.random()' by the length of the anecdotes array and flooring the result, you guarantee that the generated index is within the valid range of the array indices (0 to 'anecdotes.length')
+      const randomIndex = Math.floor(Math.random() * anecdotes.length)
+      setSelected(randomIndex)
+    }
+  
+    
+
 
     return (
         <div>
-            {anecdotes[selected]}
-            <br />
-            <br/>
-            <button onClick={() => setSelected(Math.floor(Math.random(0, 7) * 10))}>next anecdote</button>
+          <h2>Anecdote of the day</h2>
+          {anecdotes[selected]}
+          <br />
+          <p>has {points[selected]} votes</p>
+          <button onClick={handleVote}>vote</button>
+          <button onClick={nextAnecdote}>next anecdote</button>
         </div>
     )
 }
