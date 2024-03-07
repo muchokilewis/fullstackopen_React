@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import Phonebook from "./components/Phonebook";
 
 const App = () => {
   //stores inputs
@@ -11,7 +12,7 @@ const App = () => {
   ])
   // handles new inputs(meant for controlling the form input element)
   const [newName, setNewName] = useState('')
-  const [newNunber, setNewNumber] = useState('')
+  const [newNumber, setNewNumber] = useState('')
   const [searchName, setSearchName] = useState('')
 
   const addPerson = (event) => {
@@ -28,7 +29,7 @@ const App = () => {
 
     const noteObject = {
       name: newName,
-      number: newNunber,
+      number: newNumber,
       id: uuidv4 // Generate a unique id for each person
     }
     setPersons(persons.concat(noteObject))
@@ -53,36 +54,20 @@ const App = () => {
 
   const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchName.toLowerCase()))
   // console.log(filteredPersons)
-  
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          filter shown with <input value={searchName} onChange={handleSearchChange} />
-        </div>
-        <h2>Add a new</h2>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input value={newNunber} onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      {/* <div>debug: {newName}</div> */}
-      <h2>Numbers</h2>
-      <ul>
-        {filteredPersons.map((person, index) =>
-          <li key={index}>
-            {person.name} - {person.number}
-          </li>
-        )}
-      </ul>
 
-    </div>
+  return (
+    <Phonebook
+      persons={persons}
+      setPersons={setPersons}
+      newName={newName}
+      setNewName={handleNameChange}
+      newNumber={newNumber}
+      setNewNumber={handleNumberChange}
+      searchName={searchName}
+      setSearchName={handleSearchChange}
+      addPerson={addPerson}
+      filteredPersons={filteredPersons}
+    />
   )
  
 }
