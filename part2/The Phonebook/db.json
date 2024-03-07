@@ -1,0 +1,24 @@
+{
+    "persons":[
+        {
+            "name": "Lewis Muchoki",
+            "number": "213-36743",
+            "id": 1
+        },
+        {
+            "name": "Mike Kamau",
+            "number": "234-43476",
+            "id": 2
+        },
+        {
+            "name": "Silver Makena",
+            "number": "567-73453",
+            "id": 3
+        },
+        {
+            "name": "Samuel Kimani",
+            "number": "753-25374",
+            "id": 4
+        }
+    ]
+}
