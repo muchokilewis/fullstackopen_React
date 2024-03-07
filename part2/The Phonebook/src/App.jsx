@@ -3,14 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
   //stores inputs
-  const [persons, setPersons] = useState([{name: 'Lewis', id:uuidv4() }])
+  const [persons, setPersons] = useState([{name: 'Lewis', number: '123-456', id:uuidv4() }])
   // handles new inputs(meant for controlling the form input element)
   const [newName, setNewName] = useState('')
+  const [newNunber, setNewNumber] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
-    if (newName.trim() === '') {
-      window.alert('Name cannot be empty')
+    if (newName.trim() === '' || newNunber.trim() === '') {
+      window.alert('Name or number cannot be empty')
       return
     }
 
@@ -21,10 +22,12 @@ const App = () => {
 
     const noteObject = {
       name: newName,
+      number: newNunber,
       id: uuidv4 // Generate a unique id for each person
     }
     setPersons(persons.concat(noteObject))
     setNewName('')
+    setNewNumber('')
         
     console.log("button clicked", event.target)
   }
@@ -32,6 +35,10 @@ const App = () => {
   const handleNameChange = (event) => {
     // console.log(event.target.value)
     setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
   }
 
   return (
@@ -42,6 +49,9 @@ const App = () => {
           name: <input value={newName} onChange={handleNameChange}/>
         </div>
         <div>
+          number: <input value={newNunber} onChange={handleNumberChange}/>
+        </div>
+        <div>
           <button type="submit">add</button>
         </div>
       </form>
@@ -50,7 +60,7 @@ const App = () => {
       <ul>
         {persons.map(person =>
           <li key={person.id}>
-            {person.name}
+            {person.name} - {person.number}
           </li>
         )}
       </ul>
