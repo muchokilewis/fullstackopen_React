@@ -3,17 +3,23 @@ import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
   //stores inputs
-  const [persons, setPersons] = useState([{name: 'Lewis', number: '123-456', id:uuidv4() }])
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456'},
+    { name: 'Ada Lovelace', number: '39-44-5323523'},
+    { name: 'Dan Abramov', number: '12-43-234345'},
+    { name: 'Mary Poppendieck', number: '39-23-6423122'}
+  ])
   // handles new inputs(meant for controlling the form input element)
   const [newName, setNewName] = useState('')
   const [newNunber, setNewNumber] = useState('')
+  const [searchName, setSearchName] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
-    if (newName.trim() === '' || newNunber.trim() === '') {
-      window.alert('Name or number cannot be empty')
-      return
-    }
+    // if (newName.trim() === '' || newNunber.trim() === '') {
+    //   window.alert('Name or number cannot be empty')
+    //   return
+    // }
 
     if (persons.some(person => person.name === newName)) {
       alert(`${newName} is already added to phonebook`)
@@ -41,10 +47,20 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleSearchChange = (event) => {
+    setSearchName(event.target.value)
+  }
+
+  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchName.toLowerCase()))
+
   return (
     <div>
       <h2>Phonebook</h2>
       <form onSubmit={addPerson}>
+        <div>
+          filter shown with <input value={searchName} onChange={handleSearchChange} />
+        </div>
+        <h2>Add a new</h2>
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
         </div>
@@ -58,7 +74,7 @@ const App = () => {
       {/* <div>debug: {newName}</div> */}
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person =>
+        {filteredPersons.map(person =>
           <li key={person.id}>
             {person.name} - {person.number}
           </li>
