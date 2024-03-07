@@ -9,6 +9,16 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
+    if (newName.trim() === '') {
+      window.alert('Name cannot be empty')
+      return
+    }
+
+    if (persons.some(person => person.name === newName)) {
+      alert(`${newName} is already added to phonebook`)
+      return
+    }
+
     const noteObject = {
       name: newName,
       id: uuidv4 // Generate a unique id for each person
