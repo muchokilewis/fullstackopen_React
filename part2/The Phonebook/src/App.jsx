@@ -52,7 +52,8 @@ const App = () => {
   }
 
   const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchName.toLowerCase()))
-
+  // console.log(filteredPersons)
+  
   return (
     <div>
       <h2>Phonebook</h2>
@@ -74,8 +75,8 @@ const App = () => {
       {/* <div>debug: {newName}</div> */}
       <h2>Numbers</h2>
       <ul>
-        {filteredPersons.map(person =>
-          <li key={person.id}>
+        {filteredPersons.map((person, index) =>
+          <li key={index}>
             {person.name} - {person.number}
           </li>
         )}
