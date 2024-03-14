@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
 import Phonebook from "./components/Phonebook";
-
+import phoneService from "./services/phonebook"
 
 const App = () => {
   //stores inputs
@@ -13,13 +13,11 @@ const App = () => {
   const [searchName, setSearchName] = useState('')
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-        console.log('Promise fulfilled')
-      })
+    // console.log('effect')
+    phoneService
+      .getAll()
+      .then(initialContacts => setPersons(initialContacts))   
+
   }, [])
 
   const addPerson = (event) => {
@@ -40,13 +38,22 @@ const App = () => {
       number: newNumber,
       id: uuidv4 // Generate a unique id for each person
     }
-    axios
-    .post('http://localhost:3001/persons', noteObject)
-    .then(response => {
-      setPersons(persons.concat(noteObject))
-      setNewName('')
-      setNewNumber('')
-    })
+
+    phoneService
+      .create(noteObject)
+      .then(newList => {
+        setPersons(persons.concat(newList))
+        setNewName('')
+        setNewNumber('')
+      })
+
+    // axios
+    // .post('http://localhost:3001/persons', noteObject)
+    // .then(response => {
+    //   setPersons(persons.concat(noteObject))
+    //   setNewName('')
+    //   setNewNumber('')
+    // })
        
     console.log("button clicked", event.target)
   }
