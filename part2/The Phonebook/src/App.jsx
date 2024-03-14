@@ -34,15 +34,20 @@ const App = () => {
       return
     }
 
+
     const noteObject = {
       name: newName,
       number: newNumber,
       id: uuidv4 // Generate a unique id for each person
     }
-    setPersons(persons.concat(noteObject))
-    setNewName('')
-    setNewNumber('')
-        
+    axios
+    .post('http://localhost:3001/persons', noteObject)
+    .then(response => {
+      setPersons(persons.concat(noteObject))
+      setNewName('')
+      setNewNumber('')
+    })
+       
     console.log("button clicked", event.target)
   }
 
