@@ -19,6 +19,21 @@
       "id": "bcce",
       "name": "Kimani Ndung'u",
       "number": "123-547686"
+    },
+    {
+      "id": "9bf4",
+      "name": "Samuel Njoroge",
+      "number": "23123-2341"
+    },
+    {
+      "name": "Kiddo",
+      "number": "21345678",
+      "id": "f5b5"
+    },
+    {
+      "name": "kiddo",
+      "number": "2345678",
+      "id": "e6a6"
     }
   ]
 }

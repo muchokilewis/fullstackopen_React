@@ -27,26 +27,40 @@ const App = () => {
     //   return
     // }
 
-    if (persons.some(person => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
-      return
-    }
-
-
     const noteObject = {
       name: newName,
       number: newNumber,
       id: uuidv4 // Generate a unique id for each person
     }
 
-    phoneService
-      .create(noteObject)
-      .then(newList => {
-        setPersons(persons.concat(newList))
-        setNewName('')
-        setNewNumber('')
-      })
+    const existingPerson = persons.find(person => person.name === newName)
 
+    if (existingPerson) {
+      const confirmUpdate = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+      // alert(`${newName} is already added to phonebook, replace number with new one?`)
+      if (confirmUpdate){
+        phoneService
+          .updateContact(existingPerson.id, noteObject)
+          .then(updatedContact => {
+            setPersons(persons.map(person => person.id !== existingPerson.id ? person : updatedContact))
+            setNewName('')
+            setNewNumber('')
+          })
+          .catch(error => {
+            console.error('Error updating contact: ', error)
+          })
+      }
+
+    }
+    else{
+      phoneService
+        .create(noteObject)
+        .then(newList => {
+          setPersons(persons.concat(newList))
+          setNewName('')
+          setNewNumber('')
+        })
+    }
     // axios
     // .post('http://localhost:3001/persons', noteObject)
     // .then(response => {
@@ -55,7 +69,7 @@ const App = () => {
     //   setNewNumber('')
     // })
        
-    console.log("button clicked", event.target)
+    // console.log("button clicked", event.target)
   }
 
   const handleNameChange = (event) => {
