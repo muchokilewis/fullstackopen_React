@@ -74,6 +74,12 @@ const App = () => {
   const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchName.toLowerCase()))
   // console.log(filteredPersons)
 
+  // const deleteContact = (person) => {
+  //   console.log('Delete?')
+  // }
+
+  // const deleteContact = () => console.log('delete')
+
   return (
     <Phonebook
       persons={persons}

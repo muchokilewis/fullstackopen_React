@@ -3,7 +3,7 @@ import ContactList from './ContactList'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 
-const Phonebook = ({ persons, setPersons, newName, setNewName, newNumber, setNewNumber, searchName, setSearchName, addPerson, filteredPersons }) => {
+const Phonebook = ({ persons, setPersons, newName, setNewName, newNumber, setNewNumber, searchName, setSearchName, addPerson, filteredPersons, deleteContact }) => {
     return(
         <div>
             <h2>Phonebook</h2>
@@ -11,7 +11,7 @@ const Phonebook = ({ persons, setPersons, newName, setNewName, newNumber, setNew
             <h3>Add a new Contact</h3>
             <PersonForm newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} addPerson={addPerson}/>
             <h3>Numbers</h3>
-            <ContactList filteredPersons={filteredPersons} />
+            <ContactList filteredPersons={filteredPersons} deleteContact={deleteContact} />
         </div>
     )
 }
