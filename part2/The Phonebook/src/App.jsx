@@ -79,6 +79,30 @@ const App = () => {
   // }
 
   // const deleteContact = () => console.log('delete')
+  const deleteContact = (id, name) => {
+    // console.log(id)
+    const confirmDelete = window.confirm(`Are you sure you want to delete ${name}'s contact?`)
+    if (confirmDelete) {
+
+      phoneService
+        .deleteContact(id, name)
+        .then(newContacts  => {
+          setPersons(persons.filter(person => person.id !== id))
+        })
+        .catch(error => {
+          console.error('Error deleting contact: ', error)
+        })
+
+      // axios
+      //   .delete(`http://localhost:3001/persons/${id}`)
+      //   .then(response => {
+      //     setPersons(persons.filter(person => person.id !== id))
+      //   })
+      //   .catch(error => {
+      //     console.error('Error deleting contact: ', error)
+      //   })
+    }
+  }
 
   return (
     <Phonebook
@@ -92,6 +116,7 @@ const App = () => {
       setSearchName={handleSearchChange}
       addPerson={addPerson}
       filteredPersons={filteredPersons}
+      deleteContact={deleteContact}
     />
   )
  

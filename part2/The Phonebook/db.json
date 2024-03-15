@@ -1,9 +1,24 @@
 {
   "persons": [
     {
+      "name": "Mike Kamau",
+      "number": "234-43476",
+      "id": "2"
+    },
+    {
+      "name": "Samuel Kimani",
+      "number": "753-25374",
+      "id": "4"
+    },
+    {
       "id": "e0be",
       "name": "Mike Sam",
       "number": "231-34523"
+    },
+    {
+      "id": "bcce",
+      "name": "Kimani Ndung'u",
+      "number": "123-547686"
     }
   ]
-} 
+}

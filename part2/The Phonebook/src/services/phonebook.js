@@ -18,4 +18,11 @@ const create = (noteObject) => {
     })
 }
 
-export default { getAll, create }
+const deleteContact = (id, name) => {
+    const request = axios. delete(`${baseUrl}/${id}`)
+    return request.then(response => {
+        return response.data
+    })
+}
+
+export default { getAll, create, deleteContact }
