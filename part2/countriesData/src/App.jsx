@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import countryService from './services/countries';
 
+// App to get country names from an API
 const App = () => {
     const [countries, setCountries] = useState([]);
 
