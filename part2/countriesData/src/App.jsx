@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import countryService from './services/countries';
-
-// App to get country names from an API
+import CountryList from '../src/components/countryList'
+import CountrySearch from '../src/components/countrySearch'
 const App = () => {
-    const [countries, setCountries] = useState([]);
+    const [showCountryList, setShowCountryList] = useState(false)
 
-    useEffect(() => {
-        countryService.getAllOfficialNames()
-            .then(countries => setCountries(countries))
-            .catch(error => console.log('Error fetching countries:', error));
-    }, []);
+    const handleClick = () => {
+        setShowCountryList(true)
+    }
 
     return (
         <div>
-            <h1>List of Countries</h1>
-            <ul>
-                {countries.map((country, index) => (
-                    <li key={index}>{country}</li>
-                ))}
-            </ul>
+            <a href='#' onClick={handleClick}>Show List of Countries</a>
+            {showCountryList && <CountryList />}
         </div>
-    );
-};
+       
+    )
+}
 
 export default App;
