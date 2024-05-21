@@ -12,6 +12,7 @@ const App = () => {
         <div>
             <a href='#' onClick={handleClick}>Show List of Countries</a>
             {showCountryList && <CountryList />}
+            <CountrySearch />
         </div>
        
     )
