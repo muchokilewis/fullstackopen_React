@@ -61,15 +61,7 @@ const App = () => {
           setNewNumber('')
         })
     }
-    // axios
-    // .post('http://localhost:3001/persons', noteObject)
-    // .then(response => {
-    //   setPersons(persons.concat(noteObject))
-    //   setNewName('')
-    //   setNewNumber('')
-    // })
-       
-    // console.log("button clicked", event.target)
+
   }
 
   const handleNameChange = (event) => {
@@ -86,15 +78,8 @@ const App = () => {
   }
 
   const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(searchName.toLowerCase()))
-  // console.log(filteredPersons)
 
-  // const deleteContact = (person) => {
-  //   console.log('Delete?')
-  // }
-
-  // const deleteContact = () => console.log('delete')
   const deleteContact = (id, name) => {
-    // console.log(id)
     const confirmDelete = window.confirm(`Are you sure you want to delete ${name}'s contact?`)
     if (confirmDelete) {
 
@@ -106,15 +91,6 @@ const App = () => {
         .catch(error => {
           console.error('Error deleting contact: ', error)
         })
-
-      // axios
-      //   .delete(`http://localhost:3001/persons/${id}`)
-      //   .then(response => {
-      //     setPersons(persons.filter(person => person.id !== id))
-      //   })
-      //   .catch(error => {
-      //     console.error('Error deleting contact: ', error)
-      //   })
     }
   }
 

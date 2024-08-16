@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import countryService from '../services/countries';
 
 // App to get country names from an API
-const CountryList = () => {
-    const [countries, setCountries] = useState([]);
+const CountryList = ({countries}) => {
 
-    useEffect(() => {
-        countryService.getAllOfficialNames()
-            .then(countries => setCountries(countries))
-            .catch(error => console.log('Error fetching countries:', error));
-    }, []);
+    console.log(countries)
 
     return (
         <div>
