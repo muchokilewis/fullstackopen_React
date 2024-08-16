@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const CountrySearch = ({ searchQuery, handleInputChange, handleSearch, selectedCountry}) => {
+const CountrySearch = ({ searchQuery, handleInputChange, handleSearch, selectedCountry, filtered}) => {
 
   return (
     <div>
       <input type="text" value={searchQuery} onChange={(e) => handleInputChange(e.target.value)} />
       <button onClick={handleSearch}>Search</button>
       <p>{searchQuery}</p>
+      {<ul>
+        {filtered.map((country, index) => <li key={index}>{country}</li>)}
+      </ul>}
 
       {selectedCountry && (
         <div>

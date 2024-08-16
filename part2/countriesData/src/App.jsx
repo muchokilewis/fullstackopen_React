@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CountryList from '../src/components/countryList'
 import CountrySearch from '../src/components/countrySearch'
+import Filtered from "./components/Filtered"
 import countryService from '../src/services/countries';
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ const App = () => {
     const [countries, setCountries] = useState([])
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCountry, setSelectedCountry] = useState(null)
+    const [filtered, setFiltered] = useState([])
 
     useEffect(() => {
         countryService.getAllOfficialNames()
@@ -36,31 +38,48 @@ const App = () => {
         }
       }
 
+      const filterCountries = () => {
+        console.log("See")
+        const filteredCountries = countries.filter(country => country.toLowerCase().includes(searchQuery.toLowerCase()))
+        
+        if (filteredCountries.length > 10){
+          return "More then 10 countries"
+          console.log("More then 10 countries")
+        }
+        else {
+          setFiltered(filteredCountries) // Set the filtered
+          console.log(filteredCountries.length)
+          console.log(filteredCountries)
+        }
+      }
+
       const handleInputChange = (event) => {
-        console.log(event)
+        // console.log(event)
         const query = event
         setSearchQuery(query)
     
         if (query.length > 0){
-          handleSearch()
+          filterCountries()
         } else {
           setCountries([])
           setSelectedCountry(null)
         }
       }
 
-    return (
+      return (
         <div>
             <a href='#' onClick={handleClick}>Show List of Countries</a>
             {showCountryList && <CountryList countries={countries} />}
+
             <CountrySearch 
                 searchQuery={searchQuery}
                 handleInputChange={(event) => handleInputChange(event)}
                 handleSearch={handleSearch}
                 selectedCountry={selectedCountry}
                 setSearchQuery={setSearchQuery}
-
+                filtered={filtered}
             />
+            {/* <Filtered filterCountries={() => filterCountries()} /> */}
         </div>
        
     )
